@@ -17,7 +17,7 @@
     <link href="http://js.arcgis.com/3.9/js/esri/css/esri.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-	<script src="js/config.js"></script>
+
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -55,7 +55,8 @@
 		function(on, domUtils, Map, esriRequest, Legend, Draw, IdentifyTask, IdentifyParameters, GeometryService, ArcGISTiledMapServiceLayer, ArcGISDynamicMapServiceLayer, GraphicsLayer, Extent, SpatialReference){
 		
 		
-		  gsvc = new GeometryService(gsvcURL);
+		  var mapServiceURL = "https://gis.wirapids.org/arcgis/rest/services/DynamicBasemap/MapServer";
+          var vectorBaseUrl = "https://gis.wirapids.org/arcgis/rest/services/VectorBasemap/MapServer";
 		  
 
 		  
