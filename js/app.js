@@ -10,7 +10,6 @@ $('.overlayLayer').click(function(e) {
 });
 
 $(".overlayLayer").click(function () {   
-	//var inputs = dojo.query(".overlayLayer");
 	var inputs = dojo.query(".overlayLayer");
 	var visible = [-1]; 
 	for (var i = 0, il = inputs.length; i < il; i++) {
