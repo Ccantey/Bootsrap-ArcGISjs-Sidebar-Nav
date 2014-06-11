@@ -1,4 +1,4 @@
-Bootsrap-ArcGISjs-Sidebar-Nav
+Bootstrap-ArcGISjs-Sidebar-Nav
 =============================
 
 Basic ArcGIS for JavaScript API map viewer with responsive sidebar navigation
