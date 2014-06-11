@@ -12,3 +12,5 @@ that toggles overlay layers.  Built with bootsrap for RWD
 ###Demo
 
 http://geo-odyssey.com/links/Public/
+
+*Uses public tile map, missing private layers (temp)*
