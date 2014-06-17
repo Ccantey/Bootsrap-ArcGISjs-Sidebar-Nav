@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Chris Cantey">
+    <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
     <title>GIS | Wisc Rapids</title>
@@ -37,17 +37,19 @@
 	  var legendLayers = [];
       var map = null;
 	  var globalMapLayers = [];
+	  var geocoder;
 		
-		require(["dojo/on",              
+		require(["dojo/on", 
 			  "esri/domUtils",
 			  "esri/map",
-			  "esri/request",	
-              "esri/geometry/Extent",			  
-			  "esri/dijit/Legend",		  
-			  "esri/tasks/GeometryService",
-			  "esri/layers/ArcGISDynamicMapServiceLayer",
-			  "esri/SpatialReference"],
-		function(on, domUtils, Map, esriRequest, Legend, ArcGISDynamicMapServiceLayer, Extent, SpatialReference){		
+			  "esri/request",		
+			  "esri/dijit/Legend",
+			  "esri/layers/ArcGISDynamicMapServiceLayer",	
+			  "esri/dijit/Geocoder"			  ,
+			  "esri/geometry/Extent",
+			  "esri/SpatialReference",
+			  "dojo/domReady!"],
+		function(on, domUtils, Map, esriRequest, Legend, ArcGISDynamicMapServiceLayer, Geocoder, Extent, SpatialReference){	
 		
 		  var mapServiceURL = "https://gis.wirapids.org/arcgis/rest/services/DynamicBasemap/MapServer";
 		  
@@ -74,22 +76,31 @@
 		 
 		  
 		  //Add dynamic map 
-		  overlayLayer = new ArcGISDynamicMapServiceLayer(mapServiceURL, {id:"Basemap"}); //your mapService
+		  overlayLayer = new ArcGISDynamicMapServiceLayer(mapServiceURL, {id:"Basemap"});
 		  overlayLayer.setImageFormat("png32");
 		  overlayLayer.setVisibleLayers([-1]);
 		  //overlayLayer.opacity = 0.7;
 		  map.addLayer(overlayLayer);
           //console.log(overlayLayer);
 
-/*
-	      legendLayers.push({ layer: utilityMap, title: "Utility" });
-	      legendLayers.push({ layer: overlayLayer, title: " ",hideLayers:[0,1,2,3,27]});
+		  //create geocoder
+		  geocoder = new Geocoder({
+		     autoComplete: true,
+			 maxLocations: 10,
+			 suffix: " Wisconsin Rapids, WI",
+		     map:map
+		  }, "search");
+		  geocoder.startup();
+		  
+          //legendLayers.push({ layer: map, title: " ",hideLayers:[0,1,2,3,27]});
+	      legendLayers.push({ layer: overlayLayer, title: "Legend ",hideLayers:[0,1,2,3,27]});
+		  console.log(legendLayers);
 		  legend = new Legend({
             map:map,
             layerInfos:legendLayers
           },"legendDiv");
 		  legend.startup();
-	      map.enableScrollWheelZoom(); */
+
   
 		   
 	  });
@@ -101,7 +112,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -109,24 +120,27 @@
           </button>
           <a class="navbar-brand" href="#">Wisconsin Rapids</a>
         </div>
+		<!--search-->
         <div class="navbar-collapse collapse">
-           <ul class="nav navbar-nav navbar-right">
+           <ul class="nav navbar-nav navbar-right" id="about">
             <li><a href="#">about</a></li>
  <!--            <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li> -->
             <li><a href="#">Help</a></li>
           </ul> 
           <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
+            <div id ="search"></div>
           </form>
         </div>
+		
       </div>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar" role="navigation">
-          <ul class="nav nav-sidebar">
+    <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-left">
+	   <!--sidebar-->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <ul class="nav">
             <li class="overlayLayer"><a href="#">Garbage Pickup</a></li>
             <li class="overlayLayer"><a href="#">Sanitary_Manholes</a></li>
             <li class="overlayLayer"><a href="#">Sanitary_Pipe</a></li>
@@ -137,9 +151,11 @@
 
 		  
 		  <!--add legend here-->
-		  
+		  <section class="legend-items" id="legendDiv">
+
+           </section>
 		  <!--footer-->
-		  <img class="foot" src="images/watermark.png">
+		  <img class="foot" src="images/watermark2.png" alt="Rapids Logo">
         </div>
         <div id="map">
 
@@ -147,9 +163,12 @@
       </div>
     </div>
 
+
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/app.js"></script>
