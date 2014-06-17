@@ -1,126 +1,194 @@
-/*
- * Base structure
- */
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-html,body{
-    height:100%;
+body {
+  /* padding-top: 51px;   */
+  height: 100%;
+  font-size: 16px;
 }
 
-.row,.container-fluid{
-    height:100%;
-}
-
-#map{
-    height:100%;
-    width:100%;
-}
-
-
-/*
- * Global add-ons
- */
-
-.sub-header {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
-}
-
-
-/*
- * Sidebar
- */
-
-/* Hide for mobile, show later */
-.sidebar {
-  display: none;
-}
-@media(max-width: 768px){
 .esriSimpleSlider{
-  margin-left:0;
-  margin-top:45px;
-}
-}
-@media (min-width: 768px) {
-  .sidebar {
-    position: fixed;
-    top: 51px;
-    bottom: 0;
-    left: 0;
-	width: 250px;
-    z-index: 5000;
-    display: block;
-    padding: 20px;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #333;
-	
-    border-right: 1px solid #101010;
-	-moz-box-shadow:    3px 10px 10px 1px #222;
-    -webkit-box-shadow: 3px 10px 10px 1px #222;
-    box-shadow:         3px 10px 10px 1px #222;
-  }
-  .esriSimpleSlider{
   margin-left:240px;
-  margin-top:45px;
+  margin-top:45px; 
 }
+.esriAttributionItem,.esriAttributionLastItem{
+  display:none !important;
+}
+.row,.container-fluid{
+  height:100%;
+}
+.form-control{
+ /* background-color:#555; */
+ 
+}
+.form-control:focus{
+ border-color: #98CC65;
+ box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(152, 204, 101, 0.6);
+ outline: 0 none; 
+}
+#about{
+  color: #98CC65 !important; /*here is where i left off*/
+}
+#map{
+  height:100%;
+  width:100%;
+  position: fixed;
+}
+/* .text-center {
+  padding-top: 20px;
+} */
+/* .col-xs-12 {
+  background-color: #fff;
+} */
+#sidebar {
+  z-index: 1000;
+  width: 250px;
+  height: 100%;
+  padding-right: 0;
+  padding-top: 52px;
+  /* overflow-x: hidden; */
+  /* overflow-y: auto;  */
+  background-color: #333;
+  bottom: 0;
+  position:fixed;
+
+  border-right: 1px solid #101010;
+	-moz-box-shadow:    3px 10px 10px 1px #222;
+	-webkit-box-shadow: 3px 10px 10px 1px #222;
+	box-shadow:         3px 10px 10px 1px #222;
+}
+#sidebar .nav {
+  width: 95%;  
+}
+
+#sidebar li {
+  /* border:0 #f2f2f2 solid; */
+  /* border-bottom-width:1px; */
+}
+#sidebar .nav>li>a:hover {
+  text-decoration: none;
+  background: linear-gradient(#4b4b4b, #323232);
+  color: #fff;  
+    }
+#sidebar .nav>li>a:focus,#sidebar .nav>li>a:active {
+  /* text-decoration: none; */
+  background: linear-gradient(#373737, #323232);
+  color:#98CC65;
+  font-weight:bold;
+	} 
+.highlight {
+  text-decoration: none;
+  background: linear-gradient(#373737, #323232);
+  color:#98CC65 !important;
+  -webkit-text-fill-color: #98CC65 !important;
+  -moz-text-decoration-color: #98CC65;
+  font-weight:bold;
+} 
+#legendDiv{
+  color:#fff;
+  position:fixed;
+  overflow:auto;
+  font-size:14px;
 }
 .foot{
-  position:fixed;  
+  position:absolute;  
   bottom:0px;
   left:50px;
   right:0px;
-  margin-bottom:10px;
+  padding-top:10px;
 }
 
-/* Sidebar navigation */
-.nav-sidebar {
-  margin:-21px -21px 20px -20px;
-}
-.nav-sidebar > li > a {
-  padding-right: 20px;
-  padding-left: 20px;
-}
-.nav-sidebar  .active > a {
-  color: #fff;
-  font-weight: bold;
-  background-color: #777; 
+/* collapsed sidebar styles */
+@media screen and (max-width: 767px) {
+	.esriSimpleSlider{
+	  margin-left:0;
+	  margin-top:45px;
+	}
+	.esriAttributionItem,.esriAttributionLastItem{
+	  display:none !important;
+	}
+	#legendDiv{
+	   color:#fff;
+	   position:fixed;
+	   overflow:auto;
+	   font-size: 14px;
+	}
+	.foot{
+      display:none;
+     }
+    .row-offcanvas {
+      position: relative;
+      -webkit-transition: all 0.25s ease-out;
+      -moz-transition: all 0.25s ease-out;
+      transition: all 0.25s ease-out;
+    }
+    .row-offcanvas-left
+          .sidebar-offcanvas {
+        left: -250px;
+     }
+    .row-offcanvas-left.active  {
+      /* left: 41.6%; */
+		left:250px;
+    }
+    .sidebar-offcanvas {
+      top: 0;
+      width: 250px;
+    }
+    #sidebar {
+      z-index: 1000;
+      background-color: #333;
+	  padding-top:0;
+	  height:100%;
+	  position:fixed;
+    }
+    .row-offcanvas-left.active #sidebar {
+      z-index: 1000;
+      background-color: #333;
+      padding-top:51px;
+	  left:0;
+	  height:100%;
+	  position:fixed;
+    }
+    #sidebar .nav>li {
+      width:100%;
+      color: #ddd;
+      background: linear-gradient(#3E3E3E, #383838);
+      border-top: 1px solid #484848;
+      border-bottom: 1px solid #2E2E2E;
+    }
+    #sidebar .nav>li:first-child {
+      border-top:0;
+    }
+    #sidebar .nav>li>a {
+      color: #ddd;
+    }
+    #sidebar .nav>li>a>img {
+      max-width: 14px;
+    }
+    #sidebar .nav>li>a:hover {
+      text-decoration: none;
+      background: linear-gradient(#373737, #323232);
+      color: #fff;  
+    }
+	#sidebar .nav>li>a:focus,#sidebar .nav>li>a:active {
+	  text-decoration: none;
+      background: linear-gradient(#4b4b4b, #323232);
+	  color:#98CC65;
+	  font-weight:bold;
+	}
+	
+    #sidebar .nav .caret {
+      border-top-color: #fff;
+      border-bottom-color: #fff;
+    }
+    #sidebar .nav a:hover .caret{
+      border-top-color: #fff;
+      border-bottom-color: #fff;
+    }
+	.navbar-toggle{
+	  /* color: #98CC65; */
+	  background-color: #98CC65;
+	}
+	.navbar-toggle:focus, .navbar-toggle:active{
+	 /* color: #98CC65; */
+	 background-color: #98CC65 !important;
+	}
 }
 
-
-/*
- * Main content
- */
-
-.main {
-  padding: 20px;
-}
-@media (min-width: 768px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
-  }
-}
-.main .page-header {
-  margin-top: 0;
-}
-
-
-/*
- * Placeholder dashboard ideas
- */
-
-.placeholders {
-  margin-bottom: 30px;
-  text-align: center;
-}
-.placeholders h4 {
-  margin-bottom: 0;
-}
-.placeholder {
-  margin-bottom: 20px;
-}
-.placeholder img {
-  display: inline-block;
-  border-radius: 50%;
-}
