@@ -38,6 +38,7 @@
       var map = null;
 	  var globalMapLayers = [];
 	  var geocoder;
+	  var gpsid;
 		
 		require(["dojo/on", 
 			  "esri/domUtils",
@@ -51,13 +52,13 @@
 			  "dojo/domReady!"],
 		function(on, domUtils, Map, esriRequest, Legend, ArcGISDynamicMapServiceLayer, Geocoder, Extent, SpatialReference){	
 		
-		  var mapServiceURL = "https://gis.wirapids.org/arcgis/rest/services/DynamicBasemap/MapServer";
+		  var mapServiceURL = "https://gis.wirapids.org/arcgis/rest/services/PublicBasemap/MapServer";
 		  
 		  //initExtent = new Extent({xmin:-1.0016607077900654E7,ymin:5514621.059962168,xmax:-9982809.986253398,ymax:5538802.983481816,spatialReference:{wkid:102100}})
 		  map = new Map("map", {
 			center: [-89.83, 44.39],
 			zoom: 14,
-			basemap:'hybrid'
+			basemap:'satellite'
 			
 		  }); 
 		var layersRequest = esriRequest({
@@ -78,7 +79,7 @@
 		  //Add dynamic map 
 		  overlayLayer = new ArcGISDynamicMapServiceLayer(mapServiceURL, {id:"Basemap"});
 		  overlayLayer.setImageFormat("png32");
-		  overlayLayer.setVisibleLayers([-1]);
+		  overlayLayer.setVisibleLayers([3,4,11]);
 		  //overlayLayer.opacity = 0.7;
 		  map.addLayer(overlayLayer);
           //console.log(overlayLayer);
@@ -93,7 +94,7 @@
 		  geocoder.startup();
 		  
           //legendLayers.push({ layer: map, title: " ",hideLayers:[0,1,2,3,27]});
-	      legendLayers.push({ layer: overlayLayer, title: "Legend ",hideLayers:[0,1,2,3,27]});
+	      legendLayers.push({ layer: overlayLayer, title: "Legend ",hideLayers:[3,4,11]});
 		  console.log(legendLayers);
 		  legend = new Legend({
             map:map,
@@ -112,13 +113,17 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
+		
+          <button id="bars"type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Wisconsin Rapids</a>
+		  <button id="gps"type="button" class="btn-lg navbar-toggle" >		
+		    <span class="glyphicon glyphicon-screenshot"></span> 
+		  </button>
+          <a id="cityviewer" class="navbar-brand" href="http://www.wirapids.org">Wisconsin Rapids</a><a class="navbar-brand" href="http://www.wirapids.org" target="blank" id="cityviewerSMALL">Wisc Rapids</a>
         </div>
 		<!--search-->
         <div class="navbar-collapse collapse">
@@ -141,12 +146,12 @@
 	   <!--sidebar-->
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
           <ul class="nav">
-            <li class="overlayLayer"><a href="#">Garbage Pickup</a></li>
-            <li class="overlayLayer"><a href="#">Sanitary_Manholes</a></li>
-            <li class="overlayLayer"><a href="#">Sanitary_Pipe</a></li>
-			<li class="overlayLayer"><a href="#">Construction</a></li>
-            <li class="overlayLayer"><a href="#">Trails & Parks</a></li>
-            <li class="overlayLayer"><a href="#">Zoning</a></li>
+            <li class="overlayLayer"><a href="#">Refuse</a></li>
+            <li class="overlayLayer"><a href="#">Developable City Property</a></li>
+            <li class="overlayLayer"><a href="#">Alderman Districts</a></li>
+			<li class="overlayLayer"><a href="#">Parks & Trails</a></li>
+            <li class="overlayLayer"><a href="#">Zoning Districts</a></li>
+            <li class="overlayLayer"><a href="#">Extra</a></li>
           </ul>
 
 		  
