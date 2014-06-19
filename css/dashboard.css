@@ -1,5 +1,4 @@
 body {
-  /* padding-top: 51px;   */
   height: 100%;
   font-size: 16px;
 }
@@ -11,12 +10,12 @@ body {
 .esriAttributionItem,.esriAttributionLastItem{
   display:none !important;
 }
+
 .row,.container-fluid{
   height:100%;
 }
 .form-control{
- /* background-color:#555; */
- 
+ /* background-color:#555; */ 
 }
 .form-control:focus{
  border-color: #98CC65;
@@ -25,6 +24,15 @@ body {
 }
 #about{
   color: #98CC65 !important; /*here is where i left off*/
+}
+
+#cityviewer{
+/* color: #ff6600; */
+}
+
+#cityviewerSMALL{
+display: none;
+/* color: #ff6600; */
 }
 #map{
   height:100%;
@@ -43,6 +51,7 @@ body {
   height: 100%;
   padding-right: 0;
   padding-top: 52px;
+  padding-left: 0;
   /* overflow-x: hidden; */
   /* overflow-y: auto;  */
   background-color: #333;
@@ -55,7 +64,7 @@ body {
 	box-shadow:         3px 10px 10px 1px #222;
 }
 #sidebar .nav {
-  width: 95%;  
+  width: 100%;  
 }
 
 #sidebar li {
@@ -66,13 +75,14 @@ body {
   text-decoration: none;
   background: linear-gradient(#4b4b4b, #323232);
   color: #fff;  
-    }
+}
 #sidebar .nav>li>a:focus,#sidebar .nav>li>a:active {
   /* text-decoration: none; */
   background: linear-gradient(#373737, #323232);
   color:#98CC65;
   font-weight:bold;
-	} 
+} 
+
 .highlight {
   text-decoration: none;
   background: linear-gradient(#373737, #323232);
@@ -86,6 +96,7 @@ body {
   position:fixed;
   overflow:auto;
   font-size:14px;
+  padding-left:15px;
 }
 .foot{
   position:absolute;  
@@ -94,6 +105,19 @@ body {
   right:0px;
   padding-top:10px;
 }
+  @media (max-width: 480px) { 
+    #cityviewerSMALL{
+        display: table;
+    }
+	#cityviewer{
+         display: none;
+    }
+	#sidebar-wrapper {
+	   overflow-y: scroll;
+	   width: 100%;
+	}
+  
+  }
 
 /* collapsed sidebar styles */
 @media screen and (max-width: 767px) {
@@ -182,13 +206,26 @@ body {
       border-top-color: #fff;
       border-bottom-color: #fff;
     }
-	.navbar-toggle{
+	#bars{
 	  /* color: #98CC65; */
 	  background-color: #98CC65;
 	}
-	.navbar-toggle:focus, .navbar-toggle:active{
+	#bars:focus, #bars:active{
 	 /* color: #98CC65; */
 	 background-color: #98CC65 !important;
+	}
+	
+	#gps {
+	 color: #98CC65;
+	 background-color:transparent;
+	 border: none;
+	 position:absolute;
+	 left:50%;
+	 /* margin-right:auto; */
+	}
+	#gps.navbar-toggle:focus, .navbar-toggle:active{
+	 color: #FFF;
+	 /* background-color: #98CC65 !important; */
 	}
 }
 
