@@ -4,7 +4,7 @@ Bootstrap-ArcGISjs-Sidebar-Nav
 Basic ArcGIS for JavaScript API map viewer with responsive sidebar navigation
 that toggles overlay layers.  Built with bootsrap for RWD
 
-*Search with bigscreen, geolocation API with small screen*
+*Search with big screen, geolocation API with small screen*
 
 ###Use your mapservice     
     //set overlayLayer
