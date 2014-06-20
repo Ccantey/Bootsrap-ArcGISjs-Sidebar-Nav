@@ -3,16 +3,17 @@ $(document).ready(function () {
 
 
 $('#gps').click(function () {
-    map.graphics.clear();
+     map.graphics.clear();
+	  require(["esri/domUtils"], function(domUtils){
 	if (navigator.geolocation) {
 		//showPageLoadingMsg();
 		//if you want to track as the user moves setup navigator.geolocation.watchPostion
 		// domUtils.show(("loading"));
-		$('#loading').show;
+		domUtils.show(loading);
 		navigator.geolocation.getCurrentPosition(zoomToLocation, locationError);
 		gpsid = navigator.geolocation.watchPosition(showLocation, locationError);
 	}
-
+  });
 });
 
 function locationError(error) {
@@ -51,17 +52,39 @@ function zoomToLocation(position) {
 	map.centerAndZoom(pt, 20);
 	//uncomment to add a graphic at the current location
 	var symbol = new PictureMarkerSymbol("images/bluedot.png", 40, 40);
-	map.graphics.add(new Graphic(pt, symbol));
+	graphic = new Graphic(pt, symbol);
+	map.graphics.add(graphic);
 	domUtils.hide(loading);
+
   });
 }
 
 function showLocation(location) {
+  require(["esri/geometry/webMercatorUtils", "esri/symbols/PictureMarkerSymbol","esri/geometry/Point","esri/graphic","esri/domUtils"], function(webMercatorUtils, PictureMarkerSymbol,Point,Graphic,domUtils){
+    var pt = webMercatorUtils.geographicToWebMercator(new Point(location.coords.longitude, location.coords.latitude));
+	var symbol = new PictureMarkerSymbol("images/bluedot.png", 40, 40);
    if (location.coords.accuracy <= 500) {
-     // the reading is accurate, do something
+   // the reading is accurate, do this
+     if (!graphic) {	
+		graphic = new Graphic(pt, symbol);
+		map.graphics.add(graphic);
+		map.centerAndZoom(pt, 20);
+		domUtils.hide(loading);
+	  }else{ //move the graphic if it exists   
+		 graphic.setGeometry(pt);
+		 map.centerAndZoom(pt, 20);
+		}	  
+
    } else {
-     // reading is not accurate enough, do something else
-   }
+		 // reading is not accurate enough, do something else
+		map.centerAndZoom(pt, 20);
+		alert('The positional accuracy of your device is low. Best positional accuracy is obtained with a GPS enabled device such as a smart phone.');
+		navigator.geolocation.clearWatch(gpsid);
+		graphic = new Graphic(pt, symbol);
+		map.graphics.add(graphic);
+		domUtils.hide(loading);
+     }
+   });	
 }
 				
   $('[data-toggle=offcanvas]').click(function() {
