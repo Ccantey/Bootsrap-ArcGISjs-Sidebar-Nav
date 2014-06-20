@@ -39,6 +39,7 @@
 	  var globalMapLayers = [];
 	  var geocoder;
 	  var gpsid;
+	  var graphic;
 		
 		require(["dojo/on", 
 			  "esri/domUtils",
@@ -83,7 +84,13 @@
 		  //overlayLayer.opacity = 0.7;
 		  map.addLayer(overlayLayer);
           //console.log(overlayLayer);
-
+		  on(map, "update-end", function(){
+		    domUtils.hide(loading);
+			map.disableDoubleClickZoom();
+		  });
+          on(map, "update-start", function(){
+		    domUtils.show(loading);
+		  });
 		  //create geocoder
 		  geocoder = new Geocoder({
 		     autoComplete: true,
@@ -163,7 +170,7 @@
 		  <img class="foot" src="images/watermark2.png" alt="Rapids Logo">
         </div>
         <div id="map">
-
+          <img id="loading" src="images/loading.gif" style="position:absolute;top:50%;left:50%;z-index:1111;width:32px;height:32px;" >
         </div>
       </div>
     </div>
