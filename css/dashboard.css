@@ -3,12 +3,30 @@ body {
   font-size: 16px;
 }
 
-.esriSimpleSlider{
-  margin-left:240px;
-  margin-top:45px; 
+/*social media plug-ins*/
+i.fb,span.fb{
+  color: #98CC65;   
 }
-.esriAttributionItem,.esriAttributionLastItem{
-  display:none !important;
+i.tw,span.tw{
+  color: #98CC65; 
+}
+i.fb:hover,span.fb:hover{
+  color: #3b5998; 
+}
+i.tw:hover,span.tw:hover{
+  color: #00aced; 
+}
+
+/*Bootstrap overrides*/
+.nav>li>a{
+  line-height: 15px ;
+  border:none;
+  outline: none;
+}
+
+.btn-default{
+  background-color: transparent;
+  border: none;
 }
 
 .row,.container-fluid{
@@ -22,6 +40,8 @@ body {
  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(152, 204, 101, 0.6);
  outline: 0 none; 
 }
+
+/*Custom CSS*/
 #about{
   color: #98CC65 !important; /*here is where i left off*/
 }
@@ -39,12 +59,7 @@ display: none;
   width:100%;
   position: fixed;
 }
-/* .text-center {
-  padding-top: 20px;
-} */
-/* .col-xs-12 {
-  background-color: #fff;
-} */
+
 #sidebar {
   z-index: 1000;
   width: 250px;
@@ -57,40 +72,51 @@ display: none;
   background-color: #333;
   bottom: 0;
   position:fixed;
-
   border-right: 1px solid #101010;
 	-moz-box-shadow:    3px 10px 10px 1px #222;
 	-webkit-box-shadow: 3px 10px 10px 1px #222;
 	box-shadow:         3px 10px 10px 1px #222;
 }
+
 #sidebar .nav {
   width: 100%;  
 }
 
-#sidebar li {
-  /* border:0 #f2f2f2 solid; */
+#sidebar .nav li {
+  border-bottom:1px #101010 solid; 
   /* border-bottom-width:1px; */
 }
-#sidebar .nav>li>a:hover {
+
+#sidebar .nav li a{
+  display:block;
+}
+#sidebar .nav li a:hover {
   text-decoration: none;
   background: linear-gradient(#4b4b4b, #323232);
   color: #fff;  
 }
-#sidebar .nav>li>a:focus,#sidebar .nav>li>a:active {
+#sidebar .nav li a:focus,#sidebar .nav li a:active {
   /* text-decoration: none; */
   background: linear-gradient(#373737, #323232);
   color:#98CC65;
   font-weight:bold;
 } 
 
-.highlight {
+.esriSimpleSlider{
+  margin-left:240px;
+  margin-top:45px; 
+}
+.esriAttributionItem,.esriAttributionLastItem{
+  display:none !important;
+}
+/* .highlight {
   text-decoration: none;
   background: linear-gradient(#373737, #323232);
   color:#98CC65 !important;
   -webkit-text-fill-color: #98CC65 !important;
   -moz-text-decoration-color: #98CC65;
   font-weight:bold;
-} 
+}  */
 #legendDiv{
   color:#fff;
   position:fixed;
@@ -112,10 +138,10 @@ display: none;
 	#cityviewer{
          display: none;
     }
-	#sidebar-wrapper {
+/* 	#sidebar-wrapper {
 	   overflow-y: scroll;
 	   width: 100%;
-	}
+	} */
   
   }
 
@@ -175,7 +201,7 @@ display: none;
       color: #ddd;
       background: linear-gradient(#3E3E3E, #383838);
       border-top: 1px solid #484848;
-      border-bottom: 1px solid #2E2E2E;
+      /* border-bottom: 1px solid #2E2E2E; */
     }
     #sidebar .nav>li:first-child {
       border-top:0;
@@ -220,12 +246,57 @@ display: none;
 	 background-color:transparent;
 	 border: none;
 	 position:absolute;
-	 left:50%;
-	 /* margin-right:auto; */
+	 left:40%;
+	 /* Animation */ 
+	   -webkit-animation: Pulse 3s 4 alternate; /* Safari 4+ */
+       -moz-animation:    Pulse 3s 4 alternate; /* Fx 5+ */
+       -o-animation:      Pulse 3s 4 alternate; /* Opera 12+ */
+       animation:         Pulse 3s 4 alternate; /* IE 10+ */
 	}
+	
 	#gps.navbar-toggle:focus, .navbar-toggle:active{
 	 color: #FFF;
-	 /* background-color: #98CC65 !important; */
+	 /* Stop Animation */ 
+	   -webkit-animation-play-state: paused; /* Safari 4+ */
+       -moz-animation-play-state:    paused; /* Fx 5+ */
+       -o-animation-play-state:      paused; /* Opera 12+ */
+       animation-play-state:         paused; /* IE 10+ */
+	}
+	
+	/*keyframes*/
+	@-webkit-keyframes Pulse {
+	  0%   { opacity: 0; }
+	  100% { opacity: 1; }
+	}
+	@-moz-keyframes Pulse {
+	  0%   { opacity: 0; }
+	  100% { opacity: 1; }
+	}
+	@-o-keyframes Pulse {
+	  0%   { opacity: 0; }
+	  100% { opacity: 1; }
+	}
+	@keyframes Pulse {
+	  0%   { opacity: 0; }
+	  100% { opacity: 1; }
+    }
+	
+	#FB {
+     line-height:15px;
+	 border:none;
+	 background-color:transparent;
+	 position:absolute;
+	 left:52%;
+	 /* /* margin-right:auto; */ 
+	}
+	
+	#TW {
+     line-height:15px;
+	 border:none;
+	 background-color:transparent;
+	 position:absolute;
+	 left:62%;
+	 /* /* margin-right:auto; */ 
 	}
 }
 
