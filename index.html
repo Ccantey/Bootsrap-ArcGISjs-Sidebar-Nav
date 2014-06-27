@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Chris Cantey, GIS Developer">
+    <meta name="author" content="Chris Cantey">
 	<link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 	<!--Facebook Share customization open graph meta tags-->
 	<meta property="og:image" content="http://geo-odyssey.com/links/Public/images/TeriBertinWR.png"/>
-	<meta property="og:title" content="Wisconsin Rapids Maps"/>
+	<meta property="og:title" content="Wisconsin Rapids GIS"/>
 	<meta property="og:description" content="Citizen Services maps for the City of Wisconsin Rapids."/>
 	<meta property="og:url" content="http://geo-odyssey.com/links/Public/"/>
     
@@ -82,8 +82,7 @@
 		  }, function(error) {
 			  console.log("Error: ", error.message);
 		  });		    
-		 
-		  
+		 		  
 		  //Add dynamic map 
 		  overlayLayer = new ArcGISDynamicMapServiceLayer(mapServiceURL, {id:"Basemap"});
 		  overlayLayer.setImageFormat("png32");
@@ -98,6 +97,7 @@
           on(map, "update-start", function(){
 		    domUtils.show(loading);
 		  });
+		  
 		  //create geocoder
 		  geocoder = new Geocoder({
 		     autoComplete: true,
@@ -135,36 +135,36 @@
             <span class="icon-bar"></span>
           </button>
 		  
-		  <button id="FB"type="button" class="btn-lg navbar-toggle" >		
-		    <span class="btn btn-default btn-xs" target="_blank" title="On Facebook" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fgeo-odyssey.com/links/Public/index.html">
+		  <!--social media plugins-->
+		  <a id="FB" class="btn-md navbar-toggle" title="Share on Facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fgeo-odyssey.com/links/Public/index.html">				    
                 <i class="fa fa-facebook fa-lg fb"></i></span> 
-		  </button>
-		  
-		  <button id="TW"type="button" class="btn-lg navbar-toggle" >		
-		    <span class="btn btn-default btn-xs" target="_blank" title="On Twitter" href="http://twitter.com/share?url=http%3A%2F%2Fgeo-odyssey.com/links/Public/index.html
+		  </a>		  
+	
+		  <a id="TW" class="btn-md navbar-toggle" target="_blank" title="Share on Twitter" href="http://twitter.com/share?url=http%3A%2F%2Fgeo-odyssey.com/links/Public/index.html
 				                                                                           &text=Citizen%20Service%20Maps%20from%20the%20City%20of%20Wisconsin%20Rapids">
-				<i class="fa fa-twitter fa-lg tw"></i></span> 
-		  </button>
-		  
+				<i class="fa fa-twitter fa-lg tw"></i>
+		  </a> 		  
 				
 				
 		  <button id="gps"type="button" class="btn-lg navbar-toggle" >		
 		    <span class="glyphicon glyphicon-screenshot"></span> 
 		  </button>
-          <a id="cityviewer" class="navbar-brand" href="http://www.wirapids.org">Wisconsin Rapids</a><a class="navbar-brand" href="http://www.wirapids.org" target="blank" id="cityviewerSMALL">Wisc Rapids</a>
+		  
+          <a id="cityviewer" class="navbar-brand" target="_blank" href="http://www.wirapids.org"><span style="color:#98cc65">Wisconsin Rapids</span> GIS</a>
+		  <a class="navbar-brand" style="color:#fff" href="http://www.wirapids.org" target="_blank" id="cityviewerSMALL"><span style="color:#98cc65">Rapids </span>GIS</a>
         </div>
 		<!--search-->
         <div class="navbar-collapse collapse">
 		
            <ul class="nav navbar-nav navbar-right" id="about">
-            <li><a href="#">about</a></li>
+            <li><a data-toggle="modal" data-target="#myModal"href="#">about</a></li>
 
 			<li>
-			    <a class="btn btn-default btn-xs" target="_blank" title="On Facebook" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fgeo-odyssey.com/links/Public/index.html">
+			    <a class="btn btn-md" target="_blank" title="On Facebook" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fgeo-odyssey.com/links/Public/index.html">
                 <i class="fa fa-facebook fa-lg fb"></i></a>
 			</li>
 			<li>
-				<a class="btn btn-default btn-xs" target="_blank" title="On Twitter" href="http://twitter.com/share?url=http%3A%2F%2Fgeo-odyssey.com/links/Public/index.html
+				<a class="btn btn-md " target="_blank" title="On Twitter" href="http://twitter.com/share?url=http%3A%2F%2Fgeo-odyssey.com/links/Public/index.html
 				                                                                           &text=Citizen%20Service%20Maps%20from%20the%20City%20of%20Wisconsin%20Rapids">
 				<i class="fa fa-twitter fa-lg tw"></i></a>
 			</li>
@@ -205,6 +205,33 @@
       </div>
     </div>
 
+	<!-- About Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="myModalLabel">About</h4>
+		  </div>
+		  <div class="modal-body">
+
+
+			    <h4>City of Wisconsin Rapids Citizen Services App</h4>
+			    <img class="rwdImage" src="images/RWD2.png"/>
+				
+				<p class="modalP">This Wisconsin Rapids map viewer was designed to provide an optimal viewing experience across a wide range of devices,including mobile phones, tablets, and desktop monitors. </p>
+				<p class="modalP">This design approach will provide similar experiences and navigation techniques across all device sizes and browser types (Internet Explorer, Chrome, Firefox, etc.). </p>
+
+			    <p>Simply select one of the public services from the left hand navigation</p>
+
+
+		  </div>
+		  <div class="modal-footer">
+
+		  </div>
+		</div>
+	  </div>
+	</div>
 
 
     <!-- Bootstrap core JavaScript
