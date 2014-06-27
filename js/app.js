@@ -2,6 +2,12 @@ $(document).ready(function () {
 
 
 
+$('#FB','#TW').click(function(e){
+    e.preventDefault();
+    var url = $(this).attr('href');
+    window.open(url);
+});
+
 $('#gps').click(function () {
      map.graphics.clear();
 	  require(["esri/domUtils"], function(domUtils){
@@ -11,7 +17,7 @@ $('#gps').click(function () {
 		// domUtils.show(("loading"));
 		domUtils.show(loading);
 		navigator.geolocation.getCurrentPosition(zoomToLocation, locationError);
-		gpsid = navigator.geolocation.watchPosition(showLocation, locationError);
+		
 	}
   });
 });
@@ -55,7 +61,7 @@ function zoomToLocation(position) {
 	graphic = new Graphic(pt, symbol);
 	map.graphics.add(graphic);
 	domUtils.hide(loading);
-
+    gpsid = navigator.geolocation.watchPosition(showLocation, locationError);
   });
 }
 
@@ -68,21 +74,22 @@ function showLocation(location) {
      if (!graphic) {	
 		graphic = new Graphic(pt, symbol);
 		map.graphics.add(graphic);
-		map.centerAndZoom(pt, 20);
+		//map.centerAndZoom(pt, 20);
 		domUtils.hide(loading);
 	  }else{ //move the graphic if it exists   
 		 graphic.setGeometry(pt);
-		 map.centerAndZoom(pt, 20);
+		 //map.centerAndZoom(pt, 20);
 		}	  
 
    } else {
 		 // reading is not accurate enough, do something else
-		map.centerAndZoom(pt, 20);
-		alert('The positional accuracy of your device is low. Best positional accuracy is obtained with a GPS enabled device such as a smart phone.');
+		zoomToLocation(location);
+		//map.centerAndZoom(pt, 20);
+		alert('The positional accuracy of your device is low. Best positional accuracy is obtained with a GPS/Wi-Fi enabled device');
 		navigator.geolocation.clearWatch(gpsid);
-		graphic = new Graphic(pt, symbol);
-		map.graphics.add(graphic);
-		domUtils.hide(loading);
+		//graphic = new Graphic(pt, symbol);
+		//map.graphics.add(graphic);
+		//domUtils.hide(loading);
      }
    });	
 }
@@ -92,21 +99,15 @@ function showLocation(location) {
   });
   
 $('#sidebar .nav>li').click(function(e){
+    //Add .highlight (css) and .active (js condition)
     $('.highlight').removeClass('highlight');
-$(this).addClass('highlight');
-
-});
-$('.overlayLayer').click(function(e) {
-  $('.overlayLayer').removeClass('active');
-  var $this = $(this);
-  if (!$this.hasClass('active')) {
-    $this.addClass('active');
-  }
-  e.preventDefault();
-});
-
-$(".overlayLayer").click(function () {   
-	//var inputs = dojo.query(".overlayLayer");
+	$('.overlayLayer').removeClass('active');
+	var $this = $(this);
+	if (!$this.hasClass('active')) {
+       $(this).addClass('highlight');
+	   $this.addClass('active');
+	   }
+	//Add GIS layers to map
 	var inputs = dojo.query(".overlayLayer");
 	var visible = [3,4,11]; //street and city labels
 	for (var i = 0, il = inputs.length; i < il; i++) {
@@ -115,10 +116,14 @@ $(".overlayLayer").click(function () {
 		var layerCheckState = $(inputs[i]);
 		//console.log('layerCheckState: ',layerCheckState);
 		var layerObject = objectFindByKey(globalMapLayers, 'name', layerLabel);
-		console.log('layerObject: ',layerObject);
+		//Add appropriate layer id/subId (groups) to map/legend;
 		if ($(layerCheckState).hasClass("active")) {
-			visible.push(layerObject.id);			
-			//console.log(layerObject.id);
+			if(!layerObject.subLayerIds){			
+			  visible.push(layerObject.id);	
+            }else{
+			  visible.push(layerObject.subLayerIds)
+            }			
+			//console.log('id',layerObject.id,'subId',layerObject.subLayerIds);
 		}
 		else {
 			$(layerCheckState).removeClass("active");
@@ -128,11 +133,11 @@ $(".overlayLayer").click(function () {
 			
 		}
 	}
-
+    console.log(visible);
 	overlayLayer.setVisibleLayers(visible);
 	legend.refresh();
 	//$('.scrollable').nanoScroller();
-
+    e.preventDefault();
 });
 
  function objectFindByKey(array, key, value) {
