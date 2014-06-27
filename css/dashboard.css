@@ -18,6 +18,11 @@ i.tw:hover,span.tw:hover{
 }
 
 /*Bootstrap overrides*/
+body .modal-dialog {
+    /* new custom width */
+    width: 600px;
+}
+
 .nav>li>a{
   line-height: 15px ;
   border:none;
@@ -47,7 +52,7 @@ i.tw:hover,span.tw:hover{
 }
 
 #cityviewer{
-/* color: #ff6600; */
+  color: #fff;
 }
 
 #cityviewerSMALL{
@@ -87,16 +92,26 @@ display: none;
   /* border-bottom-width:1px; */
 }
 
-#sidebar .nav li a{
+/* #sidebar .nav li a{
   display:block;
-}
+} */
+
+.highlight {
+  text-decoration: none;
+  background: linear-gradient(#373737, #323232);
+  color:#98CC65 !important;
+  -webkit-text-fill-color: #98CC65 !important;
+  -moz-text-decoration-color: #98CC65 !important;
+  font-weight:bold;
+} 
+
 #sidebar .nav li a:hover {
   text-decoration: none;
   background: linear-gradient(#4b4b4b, #323232);
-  color: #fff;  
+  color: #999;  
 }
+
 #sidebar .nav li a:focus,#sidebar .nav li a:active {
-  /* text-decoration: none; */
   background: linear-gradient(#373737, #323232);
   color:#98CC65;
   font-weight:bold;
@@ -109,20 +124,26 @@ display: none;
 .esriAttributionItem,.esriAttributionLastItem{
   display:none !important;
 }
-/* .highlight {
-  text-decoration: none;
-  background: linear-gradient(#373737, #323232);
-  color:#98CC65 !important;
-  -webkit-text-fill-color: #98CC65 !important;
-  -moz-text-decoration-color: #98CC65;
-  font-weight:bold;
-}  */
+
+.esriLegendLayer{
+ font-size:11px;
+}
+
 #legendDiv{
   color:#fff;
   position:fixed;
   overflow:auto;
   font-size:14px;
   padding-left:15px;
+}
+
+.modalP{
+  width:250px;
+}
+
+.rwdImage{
+  right:9px;
+  position:fixed;
 }
 .foot{
   position:absolute;  
@@ -138,11 +159,7 @@ display: none;
 	#cityviewer{
          display: none;
     }
-/* 	#sidebar-wrapper {
-	   overflow-y: scroll;
-	   width: 100%;
-	} */
-  
+	 
   }
 
 /* collapsed sidebar styles */
